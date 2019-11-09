@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
 import './App.css';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface Person {
+	firstName: string;
+	lastName: string;
+	[otherProps: string]: any;
 }
+
+const App: FC = () => {
+	const originalObject = {
+		firstName: 'Stefan',
+		lastName: 'Wille',
+		email: 'oisdjf@oisjdf.de',
+		phone: '0893929288',
+	};
+
+	const { firstName, lastName, ...otherProps }: Person = originalObject;
+
+	return (
+		<div className="App">
+			<header className="App-header">
+				<h2>Original Object:</h2>
+				<pre>{JSON.stringify(originalObject, null, 2)}</pre>
+				<h2>Destructured via Person interface:</h2>
+				firstName:
+				<pre>{JSON.stringify(firstName, null, 2)}</pre>
+				lastName:
+				<pre>{JSON.stringify(lastName, null, 2)}</pre>
+				otherProps:
+				<pre>{JSON.stringify(otherProps, null, 2)}</pre>
+			</header>
+		</div>
+	);
+};
 
 export default App;
